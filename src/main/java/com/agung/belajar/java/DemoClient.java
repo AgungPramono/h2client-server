@@ -34,7 +34,7 @@ public class DemoClient {
             }
 
             String createTable = ""
-                    + "create table siswa("
+                    + "create table IF NOT EXISTS siswa("
                     + "no_induk VARCHAR(50) NOT NULL, "
                     + "nama VARCHAR(50) NOT NULL, "
                     + "alamat VARCHAR(20) NOT NULL"
