@@ -58,21 +58,20 @@ public class DemoClient {
                 try {
                     String sql = "insert into siswa(no_induk,nama,alamat) values (?,?,?)";
                     while (true) {
-                        for (int i = 0; i < 10; i++) {
+                        for (int i = 2; i>1; i++) {
                             PreparedStatement ps = connection.prepareStatement(sql);
-//                            ps.setInt(1, i+1);
-                            ps.setString(1, "00"+i);
-                            ps.setString(2, "nama"+i);
-                            ps.setString(3, "alamat"+i);
+                            ps.setString(1, "00" + i);
+                            ps.setString(2, "nama" + i);
+                            ps.setString(3, "alamat" + i);
                             ps.executeUpdate();
-                            
+
                             log.debug("insert data");
                         }
                     }
-                    
+
                 } catch (SQLException ex) {
                     Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                }
             }
         }
         );
