@@ -33,16 +33,15 @@ public class DemoClient {
                 log.debug("koneksi berhasil");
             }
 
-//            String createTable = ""
-//                    + "create table siswa("
-////                    + "id INT NOT NULL PRIMARY KEY, "
-//                    + "no_induk VARCHAR(50) NOT NULL, "
-//                    + "nama VARCHAR(50) NOT NULL, "
-//                    + "alamat VARCHAR(20) NOT NULL"
-//                    + ")";
-//
-//            PreparedStatement ps = con.prepareStatement(createTable);
-//            ps.executeUpdate();
+            String createTable = ""
+                    + "create table siswa("
+                    + "no_induk VARCHAR(50) NOT NULL, "
+                    + "nama VARCHAR(50) NOT NULL, "
+                    + "alamat VARCHAR(20) NOT NULL"
+                    + ")";
+
+            PreparedStatement ps = con.prepareStatement(createTable);
+            ps.executeUpdate();
             batchInsert(con);
 
         } catch (ClassNotFoundException ex) {
