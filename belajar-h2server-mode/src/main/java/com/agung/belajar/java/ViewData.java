@@ -66,22 +66,20 @@ public class ViewData {
                             while (rs2.next()) {
                                 log.debug("jumlah data sekarang :{}", rs2.getInt("jumlah"));
                             }
+                            Thread.sleep(2000);
                         }
 
                     }
 
                 } catch (SQLException ex) {
                     Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         );
         thread.start();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }
