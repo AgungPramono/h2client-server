@@ -36,9 +36,9 @@ public class ViewData {
             batchQuery(con);
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -71,7 +71,7 @@ public class ViewData {
                     }
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -80,7 +80,7 @@ public class ViewData {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

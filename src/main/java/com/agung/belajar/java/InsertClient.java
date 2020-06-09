@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author agung
  */
-public class DemoClient {
+public class InsertClient {
 
     private static final ch.qos.logback.classic.Logger log = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(StartServer.class);
 
@@ -35,6 +36,7 @@ public class DemoClient {
 
             String createTable = ""
                     + "create table IF NOT EXISTS siswa("
+                    + "id VARCHAR (255) NOT NULL PRIMARY KEY, "
                     + "no_induk VARCHAR(50) NOT NULL, "
                     + "nama VARCHAR(50) NOT NULL, "
                     + "alamat VARCHAR(20) NOT NULL"
@@ -45,9 +47,9 @@ public class DemoClient {
             batchInsert(con);
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -56,31 +58,30 @@ public class DemoClient {
             @Override
             public void run() {
                 try {
-                    String sql = "insert into siswa(no_induk,nama,alamat) values (?,?,?)";
+                    String sql = "insert into siswa(id,no_induk,nama,alamat) values (?,?,?,?)";
                     while (true) {
                         for (int i = 2; i>1; i++) {
                             PreparedStatement ps = connection.prepareStatement(sql);
-                            ps.setString(1, "00" + i);
-                            ps.setString(2, "nama" + i);
-                            ps.setString(3, "alamat" + i);
+                            ps.setString(1, UUID.randomUUID().toString());
+                            ps.setString(2, "00" + i);
+                            ps.setString(3, "nama" + i);
+                            ps.setString(4, "alamat" + i);
                             ps.executeUpdate();
-
+                            
                             log.debug("insert data");
+                            Thread.sleep(4000);
                         }
                     }
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         );
         thread.start();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(DemoClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }
