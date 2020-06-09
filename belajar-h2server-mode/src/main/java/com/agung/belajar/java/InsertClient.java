@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,10 +45,20 @@ public class InsertClient {
 
             PreparedStatement ps = con.prepareStatement(createTable);
             ps.executeUpdate();
+            deleteData(con);
             batchInsert(con);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private static void deleteData(Connection connection){
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate("delete from siswa");
         } catch (SQLException ex) {
             Logger.getLogger(InsertClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,7 +80,7 @@ public class InsertClient {
                             ps.executeUpdate();
                             
                             log.debug("insert data");
-                            Thread.sleep(4000);
+                            Thread.sleep(2000);
                         }
                     }
 
